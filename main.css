@@ -1,0 +1,340 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #F1EEE8;
+}
+
+#map,
+#map1 {
+    position:absolute;
+    top:0;
+    bottom:0;
+    width:100%;
+}
+
+.leaflet-container {
+    background: #F1EEE8;
+}
+
+.leaflet-control-actionconsole,
+.leaflet-control-search {
+    border: 1px solid rgba(0,0,0,0.4);
+
+    max-width: 28px;
+    max-height: 27px;
+    overflow: hidden;
+
+    -webkit-transition: max-width .2s ease-in-out .1s;
+    -moz-transition: max-width .2s ease-in-out .1s;
+    -o-transition: max-width .2s ease-in-out .1s;
+    transition: max-width .2s ease-in-out .1s;
+}
+
+.leaflet-control-actionconsole:hover,
+.leaflet-control-actionconsole.open {
+    max-width: 108px;
+
+    -webkit-transition: max-width .2s ease-in-out .1s;
+    -moz-transition: max-width .2s ease-in-out .1s;
+    -o-transition: max-width .2s ease-in-out .1s;
+    transition: max-width .2s ease-in-out .1s;
+}
+
+.leaflet-control-search input[type=text] {
+    padding: 0;
+    margin: 0;
+}
+
+.leaflet-control-search:hover,
+.leaflet-control-search.open {
+    max-width: 500px;
+
+    -webkit-transition: max-width .2s ease-in-out .1s;
+    -moz-transition: max-width .2s ease-in-out .1s;
+    -o-transition: max-width .2s ease-in-out .1s;
+    transition: max-width .2s ease-in-out .1s;
+}
+
+a.oi,
+.leaflet-control-actionconsole a,
+.leaflet-control-settings a,
+.leaflet-control-resetzoom a {
+    display: inline-block;
+    border-right: 1px solid rgba(0,0,0,.1);
+    background-color: #fff;
+
+    padding-top: 5px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.leaflet-control-actionconsole a {
+    border-right: 1px solid rgba(0, 0, 0, .1);
+}
+
+.leaflet-control-actionconsole a:last-child {
+    border-right: 0;
+}
+
+.leaflet-control-actionconsole a:hover {
+    color: #2d85c6;
+}
+
+.leaflet-control-actionconsole a.wait {
+    background-size:12px 12px;
+    background: url(http://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/images/spinner.gif) no-repeat 50% 50%;
+}
+
+.oi[data-glyph=media-repeat]:before { content:'\e088'; }
+
+.leaflet-control-locate {
+    border: 1px solid rgba(0,0,0,0.4);
+}
+
+.leaflet-control-locate a {
+    background-color: #fff;
+    background-position: -3px, -2px;
+}
+
+.leaflet-control-locate.active a {
+    background-position: -33px -2px;
+}
+
+.leaflet-heatmap-layer {
+    opacity: 0.9;
+}
+
+#yearLabel {
+    position: absolute;
+    bottom: 10px;
+    display: block;
+    right: 45px;
+    z-index: 50;
+    color: #646464;
+}
+
+#yearLabel.parsing {
+    bottom: 0;
+    top: 14px;
+}
+
+#yearLabel strong:first-child {
+    font-size: 32px;
+}
+
+#yearLabel strong {
+    font-size: 26px;
+}
+
+#yearLabel strong:last-child {
+    font-size: 20px;
+}
+
+.leaflet-layer-history,
+.leaflet-layer-categories {
+    position: absolute;
+    background: transparent;
+    border: 0;
+    overflow: hidden;
+}
+
+.leaflet-layer-categories {
+    max-height: 185px;
+
+    -webkit-transition: all .2s ease-in-out .1s;
+    -moz-transition: all .2s ease-in-out .1s;
+    -o-transition: all .2s ease-in-out .1s;
+    transition: all .2s ease-in-out .1s;
+}
+
+.leaflet-layer-categories.topleft {
+    top: 5px;
+    left: 5px;
+}
+
+.leaflet-layer-categories.topright {
+    top: 0;
+    right: 0;
+}
+
+.leaflet-layer-categories.bottomright {
+    bottom: 0;
+    right: 0;
+}
+
+.leaflet-layer-history.bottomleft,
+.leaflet-layer-categories.bottomleft {
+    bottom: 5px;
+    left: 5px;
+}
+
+.leaflet-layer-categories:hover {
+    max-height: 80%;
+
+    -webkit-transition: all .2s ease-in-out .1s;
+    -moz-transition: all .2s ease-in-out .1s;
+    -o-transition: all .2s ease-in-out .1s;
+    transition: all .2s ease-in-out .1s;
+}
+
+
+.gLeg {
+    cursor: pointer;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+}
+
+.gtLeg {
+    fill : #f9f9f9;
+}
+
+.marker-cluster {
+    color : #f9f9f9;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+}
+
+.info-fields {
+    list-style: none;
+    padding: 0;
+}
+
+.info-fields li span:last-child {
+    font-weight: bold;
+}
+
+.tooltip {
+    pointer-events: none;
+
+    background: rgba(76, 76, 91, .7); /*123, 123, 146*/
+    border: 1px dotted #444;
+    position: absolute;
+    font: 12px 'Helvetica Neue',Arial,Helvetica,sans-serif;
+    color: rgba(244,244,244,.8);
+    padding: 10px 10px 0;
+    margin: 0;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.1);
+    max-width: 30%;
+}
+
+.tooltip h1 {
+    font-size: 15px;
+    line-height: 20px;
+    margin: 0 0 10px;
+}
+
+.childInfo {
+    font-size: 12px;
+}
+
+.childInfo h1 {
+    font-size: 12px;
+}
+
+.leaflet-layer-history {
+    background: rgba(244, 244, 244, .2);
+}
+
+.leaflet-layer-history .area {
+    fill: steelblue;
+    stroke: #ccc;
+    clip-path: url(#clip);
+}
+
+.leaflet-layer-history .areaEvent {
+    fill: #6f6;
+    fill-opacity: .125;
+    stroke: #cfc;
+    clip-path: url(#clip);
+}
+
+.leaflet-layer-history .maxline path,
+.leaflet-layer-history .maxlineEvent path,
+.leaflet-layer-history .axis path,
+.leaflet-layer-history .axis line {
+    fill: none;
+    stroke: #ccc;
+    shape-rendering: crispEdges;
+}
+
+.leaflet-layer-history .maxlineEvent path {
+    stroke: #8DB3D3;
+}
+
+.leaflet-layer-history .maxlineEvent path {
+    stroke: #cfc;
+}
+
+.leaflet-layer-history .maxline path,
+.leaflet-layer-history .maxlineEvent path {
+    stroke-opacity: .5;
+    stroke-dasharray: 9, 5;
+}
+
+.leaflet-layer-history .maxlineEvent text {
+    fill: #cfc;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+}
+
+.leaflet-layer-history .maxline text {
+    fill: #8DB3D3;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+}
+
+.leaflet-layer-history .axis text {
+    fill: #ccc;
+}
+
+
+.leaflet-layer-history .brush .extent {
+    stroke: #fff;
+    fill-opacity: .125;
+    shape-rendering: crispEdges;
+}
+
+.select-cat-bar {
+    padding-left: 3px;
+}
+
+.leaflet-control-settings {
+
+}
+
+.leaflet-control-settings-container {
+    display: block;
+    position: relative;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    max-width: 0;
+    max-height: 0;
+
+    overflow: hidden;
+
+    -webkit-transition: all .2s ease-in-out .1s;
+    -moz-transition: all .2s ease-in-out .1s;
+    -o-transition: all .2s ease-in-out .1s;
+    transition: all .2s ease-in-out .1s;
+}
+
+.leaflet-control-settings:hover a {
+    border: 0;
+}
+
+.leaflet-control-settings:hover .leaflet-control-settings-container {
+
+    padding: 5px;
+
+    max-width: 500px;
+    max-height: 500px;
+
+    -webkit-transition: all .2s ease-in-out .1s;
+    -moz-transition: all .2s ease-in-out .1s;
+    -o-transition: all .2s ease-in-out .1s;
+    transition: all .2s ease-in-out .1s;
+}
+
+.leaflet-control-settings-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}

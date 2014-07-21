@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Визуализация</title>
+
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
+    <link href="open-iconic/font/css/open-iconic.css" rel="stylesheet">
+    <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.2/leaflet.fullscreen.css' rel='stylesheet' />
+    <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+    <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+    <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.css' rel='stylesheet' />
+    <!--[if lt IE 9]>
+    <link href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.21.0/L.Control.Locate.ie.css' rel='stylesheet' />
+    <![endif]-->
+
+    <link rel="stylesheet" href="main.css"/>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="yearLabel"></div>
+
+    <div id="info" style="display:none">
+        <div>
+
+        </div>
+        <hr>
+        Powered by <a href="http://d3js.org" target="_blank">D3js</a>, <a href="http://mapbox.com" target="_blank">MapBox</a>, <a href="http://github.com/artzub/blackhole.js" target="_blank">BlackHole.js</a><br/>
+        Icons from the <a href="https://useiconic.com/open" target="_blank">OPEN ICONIC</a><br/>
+        © 2014 <a href="http://artzub.com" target="_blank">Artem Zubkov (ArtZub)</a>, <a target="_blank" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>.<br />
+    </div>
+
+    <div id="tooltipParentTemplate" style="display: none">
+        <h1>{{name}}</h1>
+        <hr/>
+        <ul class="info-fields">
+            <li><span>Участвует как: </span> <span> {{role}}</span></li>
+            <li><span>Кол-во контрактов: </span> <span> {{count}}</span></li>
+            <li><span>Сумма (руб.): </span> <span> {{sum}}</span></li>
+            <li><span>Адресс: </span> <span> {{address}}</span></li>
+        </ul>
+        <hr/>
+        Связи:
+        <ul>{{relations}}</ul>
+    </div>
+
+    <div id="patternSetting" style="display: none">
+        <input type="checkbox" id="{{id}}"/><label for="{{id}}">{{label}}</label>
+    </div>
+
+    <div id="tooltipChildTemplate" style="display: none">
+        <div class="childInfo">
+            <h1>{{name}}</h1>
+            <hr/>
+            <ul class="info-fields">
+                <li><span>Покупатель: </span> <span> {{customer}}</span></li>
+                <li><span>Продавец: </span> <span> {{supplier}}</span></li>
+                <li><span>Сумма (руб.): </span> <span> {{sum}}</span></li>
+                <li><span>Кол-во: </span> <span> {{count}}</span></li>
+                <li><span>Категория: </span> <span> {{category}}</span></li>
+                <li><span>Дата протокола: </span> <span> {{pd}}</span></li>
+                <li><span>Дата заключения: </span> <span> {{sd}}</span></li>
+                <li><span>Уровень бюджета: </span> <span> {{budget}}</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="tooltipCategoryTemplate" style="display: none">
+        <div class="childInfo">
+            <h1>{{name}}</h1>
+            <hr/>
+            <ul class="info-fields">
+                <li><span>Сумма (руб.): </span> <span> {{sum}}</span></li>
+                <li><span>Кол-во: </span> <span> {{count}}</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <script src='//api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.2/Leaflet.fullscreen.min.js'></script>
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-heat/v0.1.0/leaflet-heat.js'></script>
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.js'></script>
+
+    <script src="//d3js.org/d3.v3.js"></script>
+    <script src="http://lib.artzub.com/js/blackhole.js/js/blackhole.js"></script>
+    <script src="http://lib.artzub.com/js/blackhole.js/js/blackhole.legend.js"></script>
+    <script src="http://lib.artzub.com/js/blackhole.js/js/blackhole.progressBarBasedOnBrushAndArea.js"></script>
+    <script src="//cdn.rawgit.com/artzub/d3tooltipjs/master/tooltip.js"></script>
+
+    <!--<script src="js/L.BlackHoleLayer.js"></script>-->
+    <script src="js/L.Control.ActionConsole.js"></script>
+    <script src="js/L.Control.ResetZoom.js"></script>
+    <script src="js/L.Control.Settings.js"></script>
+    <script src="js/L.CategoriesLayer.js"></script>
+    <script src="js/L.Control.SearchCleint.js"></script>
+    <script src="js/L.HistoryBarLayer.js"></script>
+    <!--<script src="js/main.js"></script>-->
+    <script src="js/run.js"></script>
+</body>
+</html>
