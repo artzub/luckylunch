@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    background: #F1EEE8;
+    background: #2B2B2B;
 }
 
 #map,
@@ -13,7 +13,7 @@ body {
 }
 
 .leaflet-container {
-    background: #F1EEE8;
+    background: #2B2B2B;
 }
 
 .leaflet-control-actionconsole,
@@ -100,17 +100,22 @@ a.oi,
     background-position: -33px -2px;
 }
 
-.leaflet-heatmap-layer {
-    opacity: 0.9;
+/*.leaflet-heatmap-layer {
+    opacity: 1;
+}*/
+
+.leaflet-heatmap-layer canvas {
+    background: transparent;
 }
 
 #yearLabel {
     position: absolute;
-    bottom: 10px;
+    bottom: 25px;
     display: block;
     right: 45px;
     z-index: 50;
-    color: #646464;
+    color: rgb(244, 244, 244);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
 }
 
 #yearLabel.parsing {
@@ -164,7 +169,7 @@ a.oi,
 
 .leaflet-layer-history.bottomleft,
 .leaflet-layer-categories.bottomleft {
-    bottom: 5px;
+    bottom: 15px;
     left: 5px;
 }
 
@@ -209,7 +214,7 @@ a.oi,
     position: absolute;
     font: 12px 'Helvetica Neue',Arial,Helvetica,sans-serif;
     color: rgba(244,244,244,.8);
-    padding: 10px 10px 0;
+    padding: 5px;
     margin: 0;
     border-radius: 3px;
     box-shadow: 0 1px 2px rgba(0,0,0,.1);
@@ -337,4 +342,29 @@ a.oi,
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.leaflet-control-rageconsole * {
+    display: block;
+    float: left;
+    margin: 2px;
+
+    background-color: #fff;
+
+    /*padding-top: 5px;*/
+    text-align: center;
+    font-size: 16px;
+}
+.leaflet-control-rageconsole input {
+    margin-top: 4px;
+}
+
+.leaflet-control-rageconsole>*:first-child {
+    margin-top: 3px;
+    margin-left: 5px;
+}
+
+.leaflet-control-rageconsole>*:last-child {
+    float: right;
+    margin-right: 5px;
 }
