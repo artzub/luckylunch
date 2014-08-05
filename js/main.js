@@ -52,6 +52,9 @@ var settings = {
 
     // рисовать траекторию
     , drawTrack : true
+
+    // максимальная скорость
+    , maxSpeed : 4
 };
 
 !function () {
@@ -333,7 +336,7 @@ var settings = {
                 label: '<span class="oi" data-glyph="timer"></span>',
                 title: 'Скорость'
             },
-            max : 4,
+            max : maxSpeed,
             min : 0,
             step : 2,
             value : 0,
