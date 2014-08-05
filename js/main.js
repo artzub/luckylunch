@@ -336,7 +336,7 @@ var settings = {
                 label: '<span class="oi" data-glyph="timer"></span>',
                 title: 'Скорость'
             },
-            max : maxSpeed,
+            max : settings.maxSpeed,
             min : 0,
             step : 2,
             value : 0,
