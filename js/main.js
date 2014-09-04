@@ -63,24 +63,16 @@ var settings = {
         , tooltipChildTemplate = d3.select('#tooltipChildTemplate').html()
         , tooltipCategoryTemplate = d3.select('#tooltipCategoryTemplate').html()
         , yearLabel = d3.select("#yearLabel")
-        , moneyFormat = d3.format(",.2f")
+        , moneyFormat = d3.format(",")
         , patternSetting = d3.select("#patternSetting").html()
+        , logoBar
         ;
 
     var file = 'data.tsv';
-    !function () {
-        var params = {};
-        location.search.replace('?', '')
-            .split('&').forEach(function (d) {
-                var pair = d.split('=');
-                params[pair[0]] = pair[1];
-            })
-        ;
-        file = params['file'] || file;
-    }();
 
     var map = L.mapbox.map('map')
         , visLayer = L.blackHoleLayer()
+        , trendLayer = L.trendBar()
         , legend = L.categories()
         , markers = new L.MarkerClusterGroup({
             maxZoom: 18,
@@ -88,18 +80,18 @@ var settings = {
         })
         , heat = L.heatLayer([], {
             max: 1,
-            radius: 30,
-            blur: 1,
+            radius: 20,
+            blur: 10,
 
             // цвета тепловой диаграммы для заказчиков
-            gradient: {0.4: 'white', 0.65: '#FFFF9A', 1: '#FF9A9A'},
+            gradient: {0.4: '#A5BAFF', 0.65: '#3F6CFF', 1: '#FF9A9A'},
             //#377CDC
             maxZoom: 18
         })
         , heatSupplier = L.heatLayer([], {
             max: 1,
             radius: 15,
-            blur: 10,
+            blur: 14,
             // цвета тепловой диаграммы для поставщиков
             gradient: {0.4: '#377CDC', 0.65: '#C3EF3C', 1: '#FF4041'},
             maxZoom: 18
@@ -387,7 +379,10 @@ var settings = {
         }
 
         function applyParentTemplate(d) {
-            return tooltipParentTemplate.replace('{{sum}}', moneyFormat(d.sum)).replace('{{count}}', d.orders);
+            return tooltipParentTemplate
+                .replace('{{name}}', d.title)
+                .replace('{{sum}}', moneyFormat(d.sum))
+                .replace('{{count}}', d.orders);
         }
 
         function applyChildTemplate(d) {
@@ -409,6 +404,7 @@ var settings = {
             that._id = d._id;
             that.latlng = new L.LatLng(d.latlng[0], d.latlng[1]);
 
+            that.title = d.title;
             that.sum = 0;
             that.orders = 0;
             that.relations = d3.map({});
@@ -457,7 +453,8 @@ var settings = {
 
                 k.supplier = {
                     _id : 'from' + k.latitude_from + k.longitude_from,
-                    latlng : [k.latitude_from, k.longitude_from]
+                    latlng : [k.latitude_from, k.longitude_from],
+                    title : k.label_from
                 };
 
                 k.customer = {
@@ -485,7 +482,7 @@ var settings = {
                     date: startDate,
                     parent : s,
                     type: k.type,
-                    label : '',
+                    label : k.label_trend,
                     valueOf: price
                 });
 
@@ -494,7 +491,7 @@ var settings = {
                     date: realDate,
                     parent : c,
                     type: k.type,
-                    label : '',
+                    label : k.label_trend,
                     valueOf: price
                 });
             });
@@ -517,7 +514,6 @@ var settings = {
             }
 
             data = parseData(rawData);
-            console.table(data);
 
             sizes.domain(d3.extent(data));
 
@@ -582,6 +578,7 @@ var settings = {
             });
 
             legend.addTo(map);
+            trendLayer.addTo(map).bar.hide();
             visLayer.addTo(map);
 
             L.control.layers({
@@ -608,7 +605,7 @@ var settings = {
 
             visLayer._bh.setting.showTooltipOnContract = true;
             visLayer._bh.setting.showTooltipOnClient = true;
-            visLayer._bh.setting.showTooltipOnLegend = true;
+            visLayer._bh.setting.showTooltipOnLegend = false;
 
             legend.legend
                 .on('mousemove', tooltip.mousemove)
@@ -631,7 +628,8 @@ var settings = {
                 tooltip.spaceWidth(size[0])
                     .spaceHeight(size[1]);
 
-                legend.legend.size(250, size[1])
+                renameCategories();
+                legend.legend.size(370, size[1])
                     .categories(visLayer._bh.categories());
             }
 
@@ -704,6 +702,7 @@ var settings = {
                 .on('started', function () {
                     legendResize();
 
+                    trendLayer.bar.show();
                     legend.bar.show();
                     yearLabel.html('');
                     visLayer._reset();
@@ -767,6 +766,57 @@ var settings = {
                 visLayer._bh.selectNode(null);
             }
 
+            var commentLayer
+                ;
+
+            function keyForComment(d) {
+                return d;
+            }
+
+            function getComment(d) {
+                return d.label;
+            }
+
+            function updateComments(arr) {
+                if (!arr || !arr.length)
+                    return;
+
+                commentLayer = commentLayer || d3.select(map._controlContainer)
+                    .insert('div', 'firstChild')
+                    .attr('class', 'commentLayer bottomleft')
+                ;
+
+                var ds = commentLayer.selectAll('h1')
+                    .data(arr.map(getComment).filter(function(d) {
+                            return !!d;
+                        }), keyForComment)
+                    ;
+
+                ds.enter()
+                    .insert('h1', ':first-child')
+                    .text(keyForComment)
+                    .style('height', 0)
+                    .transition()
+                    .duration(1500)
+                    .style('height', '20px')
+                ;
+
+                ds.exit()
+                    .style('opacity', 1)
+                    .transition()
+                    .duration(300)
+                    .style('height', 0)
+                    .style('opacity', 0)
+                    .each('end', function() {
+                        this && this.parentNode
+                            && this.parentNode.removeChild(this);
+                    });
+            }
+
+            function onlyCustomerFilter(d) {
+                return d.parentNode.nodeValue instanceof Customer;
+            }
+
             function setMarkers(arr) {
                 return function() {
                     arr.forEach(function (d) {
@@ -792,6 +842,12 @@ var settings = {
                         (d.parentNode.nodeValue instanceof Supplier
                             ? heatSupplier : heat).addLatLng(tp.latlng);
                     });
+
+                    var filtered = arr.filter(onlyCustomerFilter);
+
+                    trendLayer.appendData(filtered);
+
+                    updateComments(filtered);
                 }
             }
 
@@ -828,6 +884,7 @@ var settings = {
                 actions.buttons.repeat.hide();
                 actions.buttons.play.hide();
                 range.bar.show();
+                trendLayer.clearData();
 
                 parentMarker = {};
                 markers.clearLayers();
@@ -869,34 +926,42 @@ var settings = {
             /IE/.test(window.navigator.userAgent)
             && legend.bar.insert('br', ':first-child');
 
-            legend.bar.insert('div', ':first-child')
-                .attr('class', 'select-cat-bar')
-                .style({
-                    'background-color': '#fff',
-                    'border': '1px solid #999',
-                    'border-color': 'rgba(0,0,0,.4)',
-                    'border-radius': '3px',
-                    'box-shadow': 'none'
-                })
-                .each(function (div) {
-                    div = d3.select(this).append('div')
-                        .attr('class', 'leaflet-bar-part leaflet-bar-part-single')
-                        .style({
-                            'padding': '10px',
-                            'display' : 'inline-block'
-                        })
-                    ;
-                    div = div.append('a')
-                        .attr('href', 'http://luckylunch.ru/');
-                    div.append('img')
-                        .attr('src', 'http://luckylunch.ru/assets/img/lucky_logo_rus.png')
-                    ;
-                    div.append('br');
-                    div.append('span')
-                        .html('При создании визуализации<br>использовались данные полученные от luckylunch.ru')
-                    ;
-                })
-            ;
+            if (!logoBar) {
+                logoBar = d3.select('#logoinfo')
+                    .style({
+                        width: null,
+                        position: null,
+                        "z-index": null,
+                        color: null
+                    });
+
+                legend.bar.node().insertBefore(logoBar.node(), legend.bar.node().firstChild);
+            }
+
+            legend.bar.show();
+
+            function renameCategories() {
+                if (!visLayer._bh)
+                    return;
+
+                var cats = visLayer._bh.categories();
+
+                cats.forEach(rename);
+            }
+
+            function rename(key, value) {
+                var values = d3.map(value.values).values();
+
+                value.name = [
+                    value.key,
+                    ' [',
+                    'заказов: ',
+                    values.length,
+                    '; cумма, руб: ',
+                    moneyFormat(d3.sum(values)),
+                    '] '
+                ].join('');
+            }
 
             function getCatName(d) {
                 return d.type;

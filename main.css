@@ -135,7 +135,7 @@ a.oi,
     font-size: 20px;
 }
 
-.leaflet-layer-history,
+.leaflet-layer-trend,
 .leaflet-layer-categories {
     position: absolute;
     background: transparent;
@@ -167,7 +167,7 @@ a.oi,
     right: 0;
 }
 
-.leaflet-layer-history.bottomleft,
+.leaflet-layer-trend.bottomleft,
 .leaflet-layer-categories.bottomleft {
     bottom: 15px;
     left: 5px;
@@ -235,65 +235,121 @@ a.oi,
     font-size: 12px;
 }
 
-.leaflet-layer-history {
-    background: rgba(244, 244, 244, .2);
+.leaflet-layer-trend {
+    bottom: 30px !important;
+    background: rgba(0, 0, 0, .3);
+    width: calc(100% - 250px);
+    height: 150px;
+    box-sizing: border-box;
 }
 
-.leaflet-layer-history .area {
-    fill: steelblue;
-    stroke: #ccc;
+.leaflet-layer-trend .area {
+    fill: none;/*#6f6;*/
+    fill-opacity: .2;
+    stroke: #6fc;
     clip-path: url(#clip);
 }
 
-.leaflet-layer-history .areaEvent {
-    fill: #6f6;
-    fill-opacity: .125;
-    stroke: #cfc;
+.leaflet-layer-trend .areaSum {
+    fill: none;/*#FF6666;*/
+    fill-opacity: .2;
+    stroke: #fc6;
     clip-path: url(#clip);
 }
 
-.leaflet-layer-history .maxline path,
-.leaflet-layer-history .maxlineEvent path,
-.leaflet-layer-history .axis path,
-.leaflet-layer-history .axis line {
+.leaflet-layer-trend .maxline path,
+.leaflet-layer-trend .maxlineEvent path,
+.leaflet-layer-trend .axis path,
+.leaflet-layer-trend .axis line {
     fill: none;
     stroke: #ccc;
+    stroke-opacity: .8;
     shape-rendering: crispEdges;
 }
 
-.leaflet-layer-history .maxlineEvent path {
+.leaflet-layer-trend .maxline path {
     stroke: #8DB3D3;
 }
 
-.leaflet-layer-history .maxlineEvent path {
+.leaflet-layer-trend .maxlineSum path {
     stroke: #cfc;
 }
 
-.leaflet-layer-history .maxline path,
-.leaflet-layer-history .maxlineEvent path {
+.leaflet-layer-trend .maxline path,
+.leaflet-layer-trend .maxlineSum path {
     stroke-opacity: .5;
     stroke-dasharray: 9, 5;
 }
 
-.leaflet-layer-history .maxlineEvent text {
+.leaflet-layer-trend .maxlineSum text {
     fill: #cfc;
     text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
 }
 
-.leaflet-layer-history .maxline text {
+.leaflet-layer-trend .maxline text {
     fill: #8DB3D3;
     text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
 }
 
-.leaflet-layer-history .axis text {
-    fill: #ccc;
+.leaflet-layer-trend .axis text {
+    fill: #999;
+    fill-opacity: .5;
 }
 
+.leaflet-layer-trend .titleAxis {
+    fill: #9fd !important;
+    fill-opacity: 1 !important;
+}
 
-.leaflet-layer-history .brush .extent {
+.leaflet-layer-trend .titleAxisI {
+    fill: #fd9 !important;
+    fill-opacity: 1 !important;
+}
+
+.leaflet-layer-trend .vline {
     stroke: #fff;
-    fill-opacity: .125;
-    shape-rendering: crispEdges;
+    stroke-opacity: .05;
+}
+
+.leaflet-layer-trend .hotLine line {
+    stroke: #cff;
+    stroke-width: .5px;
+}
+
+.leaflet-layer-trend .hotLineC circle {
+    fill: #6fc;
+}
+
+.leaflet-layer-trend .hotLineC text {
+    fill: #cff;
+}
+
+.leaflet-layer-trend .hotLineCI circle {
+    fill: #fc6;
+}
+
+.leaflet-layer-trend .hotLineCI text {
+    fill: #ffc;
+}
+
+.leaflet-layer-trend svg {
+    cursor: w-resize;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+}
+
+.commentLayer {
+    position: absolute;
+    bottom: 180px;
+    left: 5px;
+    overflow: hidden;
+    width: 100%;
+    z-index: 1000;
+    color: #f9f9f9;
+    text-shadow: 0 0 10px #cff, 1px 1px 2px #000;
+}
+.commentLayer h1 {
+    font-size: 18px;
+    overflow: hidden;
 }
 
 .select-cat-bar {

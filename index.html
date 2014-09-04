@@ -22,6 +22,8 @@
     <div id="map"></div>
     <div id="yearLabel"></div>
 
+    <div id='logoinfo' class="select-cat-bar" style="color: #3887BE; width: 321px; position: absolute; z-index: 1000; border: 1px solid rgba(0, 0, 0, 0.4); border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; box-shadow: none; background-color: rgb(255, 255, 255);"><div class="leaflet-bar-part leaflet-bar-part-single" style="padding: 10px; display: inline-block;"><a href="http://luckylunch.ru/"><img src="http://luckylunch.ru/assets/img/lucky_logo_rus.png"><br><span>При создании визуализации<br>использовались данные полученные от luckylunch.ru</span></a></div></div>
+
     <div id="info" style="display:none">
         <div>
             <!-- Здесь напиши нужную тебе информацию -->
@@ -33,8 +35,8 @@
     </div>
 
     <div id="tooltipParentTemplate" style="display: none">
-        <!--<h1>{{name}}</h1>-->
-        <!--<hr/>-->
+        <h1>{{name}}</h1>
+        <hr/>
         <ul class="info-fields">
             <li><span>Кол-во контрактов: </span> <span> {{count}}</span></li>
             <li><span>Сумма (руб.): </span> <span> {{sum}}</span></li>
@@ -82,9 +84,9 @@
     <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.js'></script>
 
     <script src="//d3js.org/d3.v3.js"></script>
-    <script src="http://lib.artzub.com/js/blackhole.js/js/blackhole.js"></script>
-    <script src="http://lib.artzub.com/js/blackhole.js/js/blackhole.legend.js"></script>
-    <script src="http://lib.artzub.com/js/blackhole.js/js/blackhole.progressBarBasedOnBrushAndArea.js"></script>
+    <script src="//cdn.rawgit.com/artzub/blackhole.js/master/js/blackhole.js?v0.0.1"></script>
+    <script src="//cdn.rawgit.com/artzub/blackhole.js/master/js/blackhole.legend.js?v0.0.1"></script>
+    <script src="//cdn.rawgit.com/artzub/blackhole.js/master/js/blackhole.progressBarBasedOnBrushAndArea.js?v0.0.1"></script>
     <script src="//cdn.rawgit.com/artzub/d3tooltipjs/master/tooltip.js"></script>
     <script src="http://maps.google.com/maps/api/js?v=3&sensor=false"></script>
 
@@ -95,8 +97,7 @@
     <script src="js/L.Control.ResetZoom.js"></script>
     <script src="js/L.Control.Settings.js"></script>
     <script src="js/L.CategoriesLayer.js"></script>
-    <script src="js/L.Control.SearchCleint.js"></script>
-    <script src="js/L.HistoryBarLayer.js"></script>
+    <script src="js/L.TrendBarLayer.js"></script>
     <script src="js/Google.js"></script>
     <script src="js/main.js"></script>
 </body>
