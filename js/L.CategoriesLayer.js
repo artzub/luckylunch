@@ -29,6 +29,7 @@ L.CategoriesLayer = L.Class.extend({
 
         this.legend = d3.blackHole.legend(this.bar, 0, 0, this.options.categories);
         this.legend.setting.lengthOfCropName = 250;
+        this.legend.setting.counter = false;
 
         this.bar.lastpostion = this.options.position;
 

@@ -712,9 +712,15 @@ var settings = {
                     actions.buttons.pause.show();
                     actions.buttons.stop.show();
                     actions.buttons.repeat.hide();
+                    legend.bar.select('svg')
+                        .style('background', 'rgba(255, 255, 255, .2)');
                 })
                 .on('processing', function (arr, l, r) {
-                    legend.legend.update();
+                    renameCategories();
+                    legend.legend
+                        .categories(visLayer._bh.categories());
+
+                    //legend.legend.update();
 
                     yearLabel.html(dateFormat(new Date(l)));
                     setTimeout(setMarkers(arr), 10);
@@ -851,7 +857,8 @@ var settings = {
                 }
             }
 
-            var waitParse = actions.bar.append('a')
+            var allCounters
+                , waitParse = actions.bar.append('a')
                 .attr('class', 'wait')
                 .on('click', function () {
                     if (d3.event) {
@@ -935,6 +942,9 @@ var settings = {
                         color: null
                     });
 
+                allCounters = legend.bar.insert('div', ':first-child')
+                    .attr('class', 'allCounters');
+
                 legend.bar.node().insertBefore(logoBar.node(), legend.bar.node().firstChild);
             }
 
@@ -946,19 +956,32 @@ var settings = {
 
                 var cats = visLayer._bh.categories();
 
+                allCounters.orders = 0;
+                allCounters.summary = 0;
                 cats.forEach(rename);
+                allCounters.html([
+                    'всего заказов: ',
+                    allCounters.orders,
+                    '<br/>',
+                    'сумма, руб: ',
+                    moneyFormat(allCounters.summary),
+                    '<br/>'
+                ].join(''));
             }
 
             function rename(key, value) {
-                var values = d3.map(value.values).values();
-
+                allCounters.orders += value.now.length;
+                var sum = d3.sum(value.now, function(d) {
+                    return +value.values['_1_' + d];
+                });
+                allCounters.summary += sum;
                 value.name = [
                     value.key,
                     ' [',
                     'заказов: ',
-                    values.length,
+                    value.now.length,
                     '; cумма, руб: ',
-                    moneyFormat(d3.sum(values)),
+                    moneyFormat(sum),
                     '] '
                 ].join('');
             }
