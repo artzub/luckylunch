@@ -5,7 +5,7 @@
 L.Control.Settings = L.Control.extend({
     options : {
         position : 'topleft',
-        title : 'Параметры',
+        title : 'Settings',
         keepOpen : false
     },
 
