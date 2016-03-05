@@ -232,7 +232,7 @@ function trendBar(div, w, h) {
                 .attr("y", 6)
                 .attr("dy", ".71em")
                 .style("text-anchor", "end")
-                .text("Кол-во")
+                .text("Max")
         ;
 
         axisYBlockI.selectAll('.titleAxisI').empty()
@@ -243,7 +243,7 @@ function trendBar(div, w, h) {
                 .attr("y", -16)
                 .attr("dy", ".71em")
                 .style("text-anchor", "end")
-                .text("Сумма")
+                .text("Amount")
         ;
 
         var ext = d3.extent(data[0].values, objectDate);
