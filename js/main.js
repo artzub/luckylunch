@@ -54,7 +54,7 @@ var settings = {
     , drawTrack : true
 
     // максимальная скорость
-    , maxSpeed : 8
+    , maxSpeed : 4
 };
 
 !function () {
@@ -306,7 +306,7 @@ var settings = {
         ;
     googleDark.addTo(map);
 
-    map.setView([39.7718, -86.16123], 17).whenReady(handleReady);
+    map.setView([39.7718, -86.16123], 4).whenReady(handleReady);
     L.polyline([[0, 0]]).addTo(map);
 
     function onError(err) {
@@ -326,7 +326,7 @@ var settings = {
             position: 'bottomright',
             strings: {
                 label: '<span class="oi" data-glyph="timer"></span>',
-                title: 'Скорость'
+                title: 'Speed'
             },
             max : settings.maxSpeed,
             min : 0,
