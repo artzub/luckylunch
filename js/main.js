@@ -306,7 +306,7 @@ var settings = {
         ;
     googleDark.addTo(map);
 
-    map.setView([39.7718, -86.16123], 4).whenReady(handleReady);
+    map.setView([39.7718, -86.16123], 6).whenReady(handleReady);
     L.polyline([[0, 0]]).addTo(map);
 
     function onError(err) {
