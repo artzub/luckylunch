@@ -54,7 +54,7 @@ var settings = {
     , drawTrack : true
 
     // максимальная скорость
-    , maxSpeed : 4
+    , maxSpeed : 8
 };
 
 !function () {
@@ -306,7 +306,7 @@ var settings = {
         ;
     googleDark.addTo(map);
 
-    map.setView([39.7718, -86.16123], 12).whenReady(handleReady);
+    map.setView([39.7718, -86.16123], 17).whenReady(handleReady);
     L.polyline([[0, 0]]).addTo(map);
 
     function onError(err) {
@@ -346,14 +346,14 @@ var settings = {
 
         map.zoomControl = L.control.zoom({
             position: 'bottomright',
-            zoomInTitle: 'Приблизить',
-            zoomOutTitle: 'Отдалить'
+            zoomInTitle: 'Zoom In',
+            zoomOutTitle: 'Zoom Out'
         }).addTo(map);
 
         L.control.resetZoom({
             position: 'bottomright',
             strings: {
-                reset: 'Переключить вид'
+                reset: 'Restart'
             }
         }).addTo(map);
 
@@ -521,10 +521,10 @@ var settings = {
                 keepOpen: true,
                 position: 'topright',
                 strings: {
-                    play: 'Запусить',
-                    stop: 'Остановить',
-                    pause: 'Приостановить',
-                    repeat: 'Начать занова'
+                    play: 'Play',
+                    stop: 'Stop',
+                    pause: 'Pause',
+                    repeat: 'Restart'
                 }
             }).addTo(map);
 
@@ -582,13 +582,13 @@ var settings = {
             visLayer.addTo(map);
 
             L.control.layers({
-                'Тёмная карта' : googleDark.addTo(map),
-                'Тёмная карта 2' : googleDarkII
+                'Google Dark' : googleDark.addTo(map),
+                'Google Dark 2' : googleDarkII
             }, {
-                'Легеда': legend,
-                'Тепловая диаграмма (рестораны)': heatSupplier.addTo(map),
-                'Тепловая диаграмма (клиеты)': heat.addTo(map),
-                'Метки': markers.addTo(map)
+                'Legend': legend,
+                'Heat map (Hotels)': heatSupplier.addTo(map),
+                'Heat map (Merchants)': heat.addTo(map),
+                'Tags': markers.addTo(map)
             }).addTo(map);
 
             L.control.fullscreen({position: 'bottomright'}).addTo(map);
@@ -727,10 +727,10 @@ var settings = {
                 })
                 .on('parsing', function () {
                     yearLabel.html([
-                        "Анализ... <strong>",
+                        "Analysis... <strong>",
                         Math.floor(curPos++ / 2),
                         "</strong>",
-                        " из ",
+                        " of ",
                         data.length / 2
                     ].join(''));
                 })
@@ -960,10 +960,10 @@ var settings = {
                 allCounters.summary = 0;
                 cats.forEach(rename);
                 allCounters.html([
-                    'всего заказов: ',
+                    'Total Transactions: ',
                     allCounters.orders,
                     '<br/>',
-                    'сумма, руб: ',
+                    'Amount, US$: ',
                     moneyFormat(allCounters.summary),
                     '<br/>'
                 ].join(''));
@@ -978,9 +978,9 @@ var settings = {
                 value.name = [
                     value.key,
                     ' [',
-                    'заказов: ',
+                    'Orders: ',
                     value.now.length,
-                    '; cумма, руб: ',
+                    '; Amount, US$: ',
                     moneyFormat(sum),
                     '] '
                 ].join('');
