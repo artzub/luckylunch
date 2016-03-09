@@ -831,7 +831,7 @@ var settings = {
                         if (!parentMarker[tp._id] && d.parentNode.nodeValue instanceof Supplier) {
                             var marker = parentMarker[tp._id] = L.marker(tp.latlng, {
                                 icon: L.mapbox.marker.icon({
-                                    'marker-symbol': tp instanceof Supplier ? 'town-hall' : 'Airport' : 'shop' ,
+                                    'marker-symbol': tp instanceof Supplier ? 'town-hall' : 'Airport',
                                     'marker-color': '222234'
                                 })
                             });
