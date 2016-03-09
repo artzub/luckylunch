@@ -1,4 +1,4 @@
-datetime	price	type	latitude_from	longitude_from	latitude_to	longitude_to	label_from	label_trend
+datetime	price	type	latitude_to	longitude_to	latitude_from	longitude_from	label_from	label_trend
 25.05.2013 21:15	73.5	hotel Susan Lockwood	-86.639913	39.825192	-86.639913	39.825192	694 HILTON EL CONQUIST    	DoWD
 28.05.2013 20:18	235.2	Travel to Auburn for work	-111.0172801	32.335948	-86.639913	39.825192	694 HILTON EL CONQUIST    	DoWD
 04.06.2013 20:28	156.68	Plumbing supplies	-111.0172801	32.335948	-86.639913	39.825192	ARGONAUT HOTEL            	DoWD
