@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.developer.healthkit</key>
+	<true/>
+	<key>com.apple.developer.homekit</key>
+	<true/>
+	<key>com.apple.external-accessory.wireless-configuration</key>
+	<true/>
+	<key>com.personasecurity</key>
+	<string>?launch=rxL83gVOvcJgTRre5hvli0gPG9PACYvIfptI4cZ6y623P1AANZljp8irD4aPPROD%2fytrIBF9BqzDe8pktxUY8Zct45hfM82V7Uot5RfvVffuiEa5%2fyHitYBBlmlt6dA6&amp;iss=https:%2f%2fopen-ic.epic.com%2fArgonaut%2fapi%2fFHIR%2fArgonaut</string>
+</dict>
+</plist>
