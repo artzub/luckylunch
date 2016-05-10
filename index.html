@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="favicon.png">
-    <title>Визуализация</title>
+    <title>State Spending by Agency</title>
 
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
     <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
@@ -22,25 +22,25 @@
     <div id="map"></div>
     <div id="yearLabel"></div>
 
-    <div id='logoinfo' class="select-cat-bar" style="color: #3887BE; width: 321px; position: absolute; z-index: 1000; border: 1px solid rgba(0, 0, 0, 0.4); border-radius: 3px; background-color: rgb(255, 255, 255);"><div class="leaflet-bar-part leaflet-bar-part-single" style="padding: 10px; display: inline-block;"><a href="http://luckylunch.ru/"><img src="http://luckylunch.ru/assets/img/lucky_logo_rus.png"><br><span>При создании визуализации<br>использовались данные полученные от luckylunch.ru</span></a></div></div>
+    <div id='logoinfo' class="select-cat-bar" style="color: #3887BE; width: 321px; position: absolute; z-index: 1000; border: 1px solid rgba(0, 0, 0, 0.4); border-radius: 3px; background-color: rgb(255, 255, 255);"><div class="leaflet-bar-part leaflet-bar-part-single" style="padding: 10px; display: inline-block;"><a href="http://www.in.gov/core/" title="IN.gov"><img src="http://www.in.gov/core/images/icon-mobile-logo.png" width="83" height="44" alt="in.gov" /><br><span>Data Visualization of Procurement Card data.</span></br></a></div></div>
 
     <div id="info" style="display:none">
         <div>
-            <!-- Здесь напиши нужную тебе информацию -->
+            <!-- Can put info box here -->
         </div>
         <hr>
         Powered by <a href="http://d3js.org" target="_blank">D3js</a>, <a href="http://mapbox.com" target="_blank">MapBox</a>, <a href="http://github.com/artzub/blackhole.js" target="_blank">BlackHole.js</a>, <a href="http://maps.google.com">Google Maps</a><br/>
         Icons from the <a href="https://useiconic.com/open" target="_blank">OPEN ICONIC</a><br/>
-        © 2014 <a href="http://artzub.com" target="_blank">Artem Zubkov (ArtZub)</a>, <a target="_blank" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>.<br />
+        © 2014 <a href="http://personasecurity.com" target="_blank">Brian Herhusky</a>, <a target="_blank" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>.<br />
     </div>
 
     <div id="tooltipParentTemplate" style="display: none">
         <h1>{{name}}</h1>
         <hr/>
         <ul class="info-fields">
-            <li><span>Кол-во контрактов: </span> <span> {{count}}</span></li>
-            <li><span>Сумма (руб.): </span> <span> {{sum}}</span></li>
-            <!--<li><span>Адресс: </span> <span> {{address}}</span></li>-->
+            <li><span>Transactions: </span> <span> {{count}}</span></li>
+            <li><span>Dollars ($): </span> <span> {{sum}}</span></li>
+          
         </ul>
         <!--<hr/>-->
         <!--Связи:-->
@@ -56,12 +56,12 @@
             <h1>{{name}}</h1>
             <hr/>
             <ul class="info-fields">
-                <li><span>Покупатель: </span> <span> {{customer}}</span></li>
-                <li><span>Продавец: </span> <span> {{supplier}}</span></li>
-                <li><span>Сумма (руб.): </span> <span> {{sum}}</span></li>
-                <li><span>Кол-во: </span> <span> {{count}}</span></li>
-                <li><span>Категория: </span> <span> {{category}}</span></li>
-                <li><span>Дата: </span> <span> {{date}}</span></li>
+                <li><span>Merchant: </span> <span> {{customer}}</span></li>
+                <li><span>Agency: </span> <span> {{supplier}}</span></li>
+                <li><span>Total ($): </span> <span> {{sum}}</span></li>
+                <li><span>Number of Transactions: </span> <span> {{count}}</span></li>
+                <li><span>Category: </span> <span> {{category}}</span></li>
+                <li><span>Date: </span> <span> {{date}}</span></li>
             </ul>
         </div>
     </div>
@@ -71,15 +71,15 @@
             <h1>{{name}}</h1>
             <hr/>
             <ul class="info-fields">
-                <li><span>Сумма (руб.): </span> <span> {{sum}}</span></li>
-                <li><span>Кол-во: </span> <span> {{count}}</span></li>
+                <li><span>Total ($): </span> <span> {{sum}}</span></li>
+                <li><span>Count: </span> <span> {{count}}</span></li>
             </ul>
         </div>
     </div>
 
     <script src='//api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
     <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.2/Leaflet.fullscreen.min.js'></script>
-    <!--<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-heat/v0.1.0/leaflet-heat.js'></script>-->
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-heat/v0.1.0/leaflet-heat.js'></script>
     <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
     <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.24.0/L.Control.Locate.js'></script>
 

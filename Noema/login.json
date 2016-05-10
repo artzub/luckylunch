@@ -1,0 +1,47 @@
+{
+  "client_id": "b486a991-2fdf-42aa-aba1-ba558279499c",
+  "client_secret": "V_HHdNQeXeP8TtYbWbMYICnp1CeqaH8lp-JhG-rHlQztTKbEvHn56zJMrhmb9Axj4i3ftFe_i_39TNNetQYO2g",
+  "redirect_uris": [
+    "http://personasecurity.com/noema"
+  ],
+  "client_name": "Noema",
+  "client_uri": null,
+  "logo_uri": "http://member.indianamedicaid.com/images/white_content_window_home_top4.png",
+  "contacts": [
+    "herhusky@gmail.com"
+  ],
+  "tos_uri": "http://personasecurity.com/noema/UserAgreement.html",
+  "token_endpoint_auth_method": "client_secret_basic",
+  "scope": "phone openid address email profile",
+  "grant_types": [
+    "authorization_code",
+    "urn:ietf:params:oauth:grant_type:redelegate"
+  ],
+  "response_types": [
+    "code"
+  ],
+  "policy_uri": "http://personasecurity.com/noema/PolicyStatement.html",
+  "jwks_uri": null,
+  "application_type": "WEB",
+  "sector_identifier_uri": null,
+  "subject_type": "public",
+  "request_object_signing_alg": null,
+  "userinfo_signed_response_alg": null,
+  "userinfo_encrypted_response_alg": null,
+  "userinfo_encrypted_response_enc": null,
+  "id_token_signed_response_alg": null,
+  "id_token_encrypted_response_alg": null,
+  "id_token_encrypted_response_enc": null,
+  "default_max_age": 60000,
+  "require_auth_time": true,
+  "default_acr_values": [],
+  "initiate_login_uri": null,
+  "post_logout_redirect_uri": null,
+  "request_uris": [],
+  "registration_access_token": "eyJhbGciOiJSUzI1NiJ9.eyJhdWQiOlsiYjQ4NmE5OTEtMmZkZi00MmFhLWFiYTEtYmE1NTgyNzk0OTljIl0sImlzcyI6Imh0dHBzOlwvXC9hdXRob3JpemUtZHN0dTIuc21hcnRoZWFsdGhpdC5vcmdcLyIsImp0aSI6IjhjMTg1NTMzLTcwMzgtNGIyNS1hNzQzLWQ5ZTEwYWRmNWVhZSIsImlhdCI6MTQ2MTUxNTYxNH0.Y9yTKGlI5iVuZrXXpoThku3bfzx9sI-prlwilF4MKENFt8jV7kKs0eCtkv1YMu6JjsHTkeHctEgtFSea8xuPBQ-RZtsZjDLApzyA2MvdS-1F01h3JURjxIwl_j7-kLA3axP47Eu311uLVJwIF1vC-JlBe7V2v-7X5paXFnBdzak",
+  "registration_client_uri": "https://authorize-dstu2.smarthealthit.org/register/b486a991-2fdf-42aa-aba1-ba558279499c",
+  "reuse_refresh_token": false,
+  "token_endpoint_auth_signing_alg": null,
+  "client_secret_expires_at": 0,
+  "client_id_issued_at": 1461515614
+}
